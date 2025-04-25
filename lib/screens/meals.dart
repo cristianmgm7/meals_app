@@ -9,6 +9,15 @@ class MealsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text(title)));
+    Widget content = const Center(child: Text('No meals found'));
+
+    if (meals.isNotEmpty) {
+      content = ListView.builder(
+        itemCount: meals.length,
+        itemBuilder: (ctx, index) => Text(meals[index].title),
+      );
+    }
+
+    return Scaffold(appBar: AppBar(title: Text(title)), body: content);
   }
 }
