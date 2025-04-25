@@ -1,9 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:meals_app/data/dummy_data.dart';
 import 'package:meals_app/screens/meals.dart';
 import 'package:meals_app/widgets/category_grid_item.dart';
-
 import 'package:meals_app/models/category.dart';
 
 class CategoriesScreen extends StatelessWidget {
@@ -39,7 +37,7 @@ class CategoriesScreen extends StatelessWidget {
           for (final category in availableCategories)
             CategoryGridItem(
               category: category,
-              onSelectCategory: () => selectCategory(context, category),
+              onSelectCategory: () => _selectCategory(context, category),
             ),
         ],
       ),
