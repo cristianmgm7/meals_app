@@ -3,22 +3,29 @@ import 'package:meals_app/models/meal.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MealItem extends StatelessWidget {
-  const MealItem({super.key, required this.meal});
+  const MealItem({super.key, required this.meal, required this.onSelectMeal});
 
   final Meal meal;
+  final void Function(Meal meal) onSelectMeal;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      clipBehavior: Clip.hardEdge,
+      elevation: 2,
       child: InkWell(
-        onTap: () {},
+        // --> On tap, the meal is selected
+        onTap: () => onSelectMeal(meal),
         child: Stack(
           children: [
             FadeInImage(
               placeholder: MemoryImage(kTransparentImage),
               image: NetworkImage(meal.imageUrl),
+              fit: BoxFit.cover,
+              height: 200,
+              width: double.infinity,
             ),
             Positioned(
               bottom: 0,
@@ -34,6 +41,40 @@ class MealItem extends StatelessWidget {
                         context,
                       ).textTheme.titleLarge!.copyWith(color: Colors.white),
                       maxLines: 2,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.schedule),
+                        Text(
+                          meal.duration.toString(),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Icon(Icons.work),
+                        Text(
+                          meal.complexity.name,
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Icon(Icons.restaurant),
+                        Text(
+                          meal.affordability.name,
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

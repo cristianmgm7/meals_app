@@ -8,6 +8,7 @@ class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
 
   void _selectCategory(BuildContext context, Category category) {
+    // --> Filtering the meals based on the category
     final filteredMeals =
         dummyMeals
             .where((meal) => meal.categories.contains(category.id))
