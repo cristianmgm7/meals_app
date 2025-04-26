@@ -51,13 +51,13 @@ class MainDrawer extends StatelessWidget {
               color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
             title: Text(
-              'Settings',
+              'Filters',
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             onTap: () {
-              onSelectScreen('settings');
+              onSelectScreen('filters');
             },
           ),
         ],
