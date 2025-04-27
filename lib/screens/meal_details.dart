@@ -20,10 +20,21 @@ class MealDetailsScreen extends ConsumerWidget {
             onPressed: () {
               ref.read(favoritesProvider.notifier).toggleFavorite(meal);
             },
-            icon: Icon(
-              ref.watch(favoritesProvider).contains(meal)
-                  ? Icons.favorite
-                  : Icons.favorite_border,
+            icon: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder:
+                  (child, animation) =>
+                      RotationTransition(turns: animation, child: child),
+              child: Icon(
+                ref.watch(favoritesProvider).contains(meal)
+                    ? Icons.favorite
+                    : Icons.favorite_border,
+                key: Key(
+                  ref.watch(favoritesProvider).contains(meal)
+                      ? 'favorite'
+                      : 'not_favorite',
+                ),
+              ),
             ),
           ),
         ],
@@ -32,6 +43,15 @@ class MealDetailsScreen extends ConsumerWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Hero(
+              tag: meal.id,
+              child: Image.network(
+                meal.imageUrl,
+                height: 300,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
             Text(
               'Ingredients',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
