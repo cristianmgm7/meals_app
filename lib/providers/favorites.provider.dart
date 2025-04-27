@@ -3,7 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals_app/models/meal.dart';
 
 class FavoritesNotifier extends StateNotifier<List<Meal>> {
-  FavoritesNotifier() : super([]);
+  FavoritesNotifier()
+    : super(
+        [],
+      ); //--> Initial state for the favorites is an empty list because we are not passing any value to the super constructor
 
   void toggleFavorite(Meal meal) {
     final mealIsFavorite = state.contains(meal);

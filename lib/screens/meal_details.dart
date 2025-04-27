@@ -16,6 +16,7 @@ class MealDetailsScreen extends ConsumerWidget {
         title: Text(meal.title),
         actions: [
           IconButton(
+            // --> Toggle the favorite status of the meal using the favoritesProvider
             onPressed: () {
               ref.read(favoritesProvider.notifier).toggleFavorite(meal);
             },
